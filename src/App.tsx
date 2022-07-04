@@ -1,30 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
-import {TestInterface} from 'types'
+import {SideMenu} from "./components/SideMenu/SideMenu";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
-function App() {
-  const foobar: TestInterface = {
-    x: 123
-  };
-  return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-              className="App-link"
-              href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Dashboard = () => {
+    return <h1>Dashboard</h1>
+};
+const Content = () => {
+    return <h1>Content</h1>
+};
+const Courses = () => {
+    return <h1>Content/Courses</h1>
+};
+const Videos = () => {
+    return <h1>Content/Videos</h1>
+};
+const Design = () => {
+    return <h1>Design</h1>
+};
+
+export const App = () => {
+    const [inActive, setInActive] = useState(false);
+
+    return (
+        <div className='App'>
+            <Router>
+                <SideMenu
+                    onCollapse={(inActive: boolean) => {
+                        console.log(inActive);
+                        setInActive(inActive)
+                    }}
+                />
+
+                <div className={`container ${inActive ? 'inActive' : ''} `}>
+                    <Routes>
+                        <Route path={'/'} element={<Dashboard/>}/>
+                        <Route path={'/content'} element={<Content/>}/>
+                        <Route path={'/content/courses'} element={<Courses/>}/>
+                        <Route path={'/content/video'} element={<Videos/>}/>
+                        <Route path={'/design'} element={<Design/>}/>
+                    </Routes>
+
+                </div>
+
+
+            </Router>
+        </div>
+    );
 }
 
-export default App;
+
