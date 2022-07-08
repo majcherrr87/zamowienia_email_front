@@ -1,34 +1,50 @@
 import React, {useEffect, useState} from 'react';
 import {MenuItem} from "./MenuItem";
 
+import logo from '../../assets/pobrane.png';
+import user from '../../assets/pobrane.jpg';
 import './sideMenu.css';
-import logo from '../../assets/pobrane.png'
-import user from '../../assets/pobrane.jpg'
 
-
-const menuItems = [
-    {name: 'Dashboard', to: '/', icon: `bi bi-speedometer2`},
-    {
-        name: 'Content',
-        to: '/content',
-        icon: 'bi bi-speedometer2',
-        subMenus: [{name: 'Courses', to: '/content/courses'}, {name: 'Video', to: '/content/video'}],
-    },
-    {name: 'Design', to: '/design', icon: 'bi bi-speedometer2'},
-];
 
 export const SideMenu = (props) => {
     const [inActive, setInActive] = useState(false);
+    const [contractors, setContractors] = useState([]);
+
+    const subMenus = contractors.map(contractor => ({
+        name: contractor.name_contractor,
+        to: `/dostawca/${contractor.name_contractor}`
+    }))
+
+    const menuItems = [
+        {name: 'Pulpit', to: '/', icon: `bi bi-speedometer2`},
+        {
+            name: 'Dostawcy',
+            to: '/dostawcy',
+            icon: 'bi bi-truck',
+            subMenus
+        },
+        {name: 'Ustawienia', to: '/ustawienia', icon: 'bi bi-gear'},
+    ];
+
 
     useEffect(() => {
         if (inActive) {
             document.querySelectorAll('.sub-menu').forEach((el) => {
                 el.classList.remove('active')
-            })
+            });
         }
-        props.onCollapse(inActive)
+        props.onCollapse(inActive);
 
-    }, [inActive])
+    }, [inActive]);
+
+    useEffect(() => {
+        (async () => {
+            const res = await fetch('http://localhost:3001/ad/all');
+            const data = await res.json();
+            setContractors(data);
+            console.log(data)
+        })();
+    }, []);
 
     return (
         <div className={`side-menu ${inActive ? 'inActive' : ''} `}>
@@ -42,13 +58,6 @@ export const SideMenu = (props) => {
                         : (<i className="bi bi-arrow-left-square-fill"></i>)
                     }
                 </div>
-            </div>
-
-            <div className="search-controller">
-                <button className='search-btn'>
-                    <i className="bi bi-search"></i>
-                </button>
-                <input type="text" placeholder={'search'}/>
             </div>
 
             <div className="divider"></div>
