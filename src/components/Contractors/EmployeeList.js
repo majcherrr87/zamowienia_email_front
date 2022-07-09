@@ -1,7 +1,7 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {EmployeeContext} from '../../contexts/EmployeeContext';
 import {Employee} from "./Emplotee";
-import {Button, Modal} from "react-bootstrap";
+import {Button, Modal, Spinner} from "react-bootstrap";
 import {AddFormContractor} from "./AddFormContractor";
 
 export const EmployeeList = () => {
@@ -11,6 +11,22 @@ export const EmployeeList = () => {
 
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
+
+    useEffect(() => {
+        handleClose();
+    }, [employees]);
+
+    if (employees === null) {
+        return <div className="table-title">
+            <div className="row">
+                <div className="col-sm-6">
+                    <Spinner animation="border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                </div>
+            </div>
+        </div>
+    }
 
 
     return <>
@@ -38,7 +54,7 @@ export const EmployeeList = () => {
             <tbody>
 
             {employees.map(employee => (
-                <tr key={employee.id}>
+                <tr key={employee.id_contractor}>
                     <Employee employee={employee}/>
                 </tr>
             ))

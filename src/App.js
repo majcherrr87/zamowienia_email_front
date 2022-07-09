@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {SideMenu} from "./components/SideMenu/SideMenu";
 import {Dashboard} from './components/Dashboard/Dashboard';
 import {Contractors} from "./components/Contractors/Contractors";
@@ -13,8 +13,8 @@ export const App = () => {
     return (
 
         <div className='App'>
-            <Router>
-                <SideMenu
+
+        <SideMenu
                     onCollapse={(inActive) => {
                         console.log(inActive);
                         setInActive(inActive);
@@ -26,8 +26,8 @@ export const App = () => {
                             <Route path={'/dostawcy'} element={<Contractors/>}/>
                         </Routes>
                     </div>
-                </Router>
-            </div>
+
+        </div>
     );
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 
 export const Employee = ({employee}) => {
+
     return (<>
             <td>{employee.name_contractor}</td>
             <td>{employee.email_contractor}</td>
