@@ -2,23 +2,23 @@ import React, {useState} from 'react';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {SideMenu} from "./components/SideMenu/SideMenu";
 import {Dashboard} from './components/Dashboard/Dashboard';
-import {SearchContext} from './contexts/search.context';
+import {Contractors} from "./components/Contractors/Contractors";
+import '../node_modules/react-bootstrap/dist/react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import {Contractors} from "./components/contractors/Contractors";
 
 export const App = () => {
-    const [search, setSearch] = useState('');
     const [inActive, setInActive] = useState(false);
 
     return (
-        <SearchContext.Provider value={{search, setSearch}}>
-            <div className='App'>
-                <Router>
-                    <SideMenu
-                        onCollapse={(inActive: boolean) => {
-                            console.log(inActive);
-                            setInActive(inActive);
-                        }}
+
+        <div className='App'>
+            <Router>
+                <SideMenu
+                    onCollapse={(inActive) => {
+                        console.log(inActive);
+                        setInActive(inActive);
+                    }}
                     />
                     <div className={`container ${inActive ? 'inActive' : ''} `}>
                         <Routes>
@@ -28,7 +28,6 @@ export const App = () => {
                     </div>
                 </Router>
             </div>
-        </SearchContext.Provider>
     );
 }
 

@@ -10,6 +10,7 @@ export const SideMenu = (props) => {
     const [inActive, setInActive] = useState(false);
     const [contractors, setContractors] = useState([]);
 
+
     const subMenus = contractors.map(contractor => ({
         name: contractor.name_contractor,
         to: `/dostawca/${contractor.name_contractor}`
@@ -39,10 +40,9 @@ export const SideMenu = (props) => {
 
     useEffect(() => {
         (async () => {
-            const res = await fetch('http://localhost:3001/ad/all');
+            const res = await fetch('http://localhost:3001/contractors/all');
             const data = await res.json();
             setContractors(data);
-            console.log(data)
         })();
     }, []);
 
@@ -59,6 +59,7 @@ export const SideMenu = (props) => {
                     }
                 </div>
             </div>
+
 
             <div className="divider"></div>
 
