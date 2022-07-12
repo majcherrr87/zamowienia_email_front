@@ -4,7 +4,8 @@ export const EmployeeContext = createContext();
 
 export const EmployeeContextProvider = (props) => {
 
-    const [employees, setEmployees] = useState(null);
+    const [employees, setEmployees] = useState([]);
+    const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -12,11 +13,10 @@ export const EmployeeContextProvider = (props) => {
             const data = await res.json();
             setEmployees(data);
         })();
-    }, []);
+        console.log('odświerzanie', refresh)
+    }, [refresh]);
 
     const addEmployee = async (name, email, address, phone) => {
-        console.log('Gotowe do wysłania ', name, email, address, phone);
-
         const res = await fetch(`http://localhost:3001/contractors/`, {
             method: 'POST',
             headers: {
@@ -30,12 +30,41 @@ export const EmployeeContextProvider = (props) => {
             }),
         });
         const data = await res.json();
-        console.log(data);
+        console.log(data)
+        setRefresh(!refresh)
     };
+    const deleteEmployee = async (id) => {
+        console.log('delete', id);
+        await fetch(`http://localhost:3001/contractors/one/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        setRefresh(!refresh)
+    };
+    const updateEmployee = async (id, updatedEmployee) => {
+        await fetch(`http://localhost:3001/contractors/one/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id_contractor: updatedEmployee.id,
+                name_contractor: updatedEmployee.name,
+                email_contractor: updatedEmployee.email,
+                address_contractor: updatedEmployee.address,
+                phone_contractor: updatedEmployee.phone,
+            }),
+        });
+
+        setRefresh(!refresh)
+
+    }
 
 
     return (
-        <EmployeeContext.Provider value={{employees, addEmployee}}>
+        <EmployeeContext.Provider value={{employees, refresh, addEmployee, deleteEmployee, updateEmployee}}>
             {props.children}
         </EmployeeContext.Provider>
     )

@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {MenuItem} from "./MenuItem";
+import {EmployeeContext} from '../../contexts/EmployeeContext';
 
 import logo from '../../assets/pobrane.png';
 import user from '../../assets/pobrane.jpg';
@@ -8,22 +9,25 @@ import './sideMenu.css';
 
 export const SideMenu = (props) => {
     const [inActive, setInActive] = useState(false);
-    const [contractors, setContractors] = useState([]);
+    const {employees} = useContext(EmployeeContext);
 
 
-    const subMenus = contractors.map(contractor => ({
-        name: contractor.name_contractor,
-        to: `/dostawca/${contractor.name_contractor}`
-    }))
+    const subMenus = employees.map(employee => ({
+        key: employee.id_contractor,
+        name: employee.name_contractor,
+        to: `/dostawca/${employee.name_contractor}`
+    }));
+
 
     const menuItems = [
         {name: 'Pulpit', to: '/', icon: `bi bi-speedometer2`},
         {
-            name: 'Dostawcy',
-            to: '/dostawcy',
-            icon: 'bi bi-truck',
+            name: 'Zamówienia',
+            to: ' ',
+            icon: 'bi bi-cart3',
             subMenus
         },
+        {name: 'Dostawcy', to: '/dostawcy', icon: 'bi bi-truck'},
         {name: 'Ustawienia', to: '/ustawienia', icon: 'bi bi-gear'},
     ];
 
@@ -38,13 +42,6 @@ export const SideMenu = (props) => {
 
     }, [inActive]);
 
-    useEffect(() => {
-        (async () => {
-            const res = await fetch('http://localhost:3001/contractors/all');
-            const data = await res.json();
-            setContractors(data);
-        })();
-    }, []);
 
     return (
         <div className={`side-menu ${inActive ? 'inActive' : ''} `}>
@@ -65,7 +62,8 @@ export const SideMenu = (props) => {
 
             <div className="main-menu">
                 <ul>
-                    {menuItems.map((menuItems, index) => (
+
+                {menuItems.map((menuItems, index) => (
                         <MenuItem
                             key={index}
                             name={menuItems.name}
@@ -79,6 +77,7 @@ export const SideMenu = (props) => {
                             }}
                         />
                     ))}
+
                 </ul>
             </div>
             <div className="side-menu-footer">
@@ -92,6 +91,7 @@ export const SideMenu = (props) => {
 
             </div>
         </div>
+
     );
 }
 
