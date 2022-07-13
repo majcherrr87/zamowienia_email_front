@@ -7,13 +7,14 @@ export const EmployeeContextProvider = (props) => {
     const [employees, setEmployees] = useState([]);
     const [refresh, setRefresh] = useState(false);
 
+
     useEffect(() => {
         (async () => {
             const res = await fetch('http://localhost:3001/contractors/all');
             const data = await res.json();
             setEmployees(data);
         })();
-        console.log('odświerzanie', refresh)
+        console.log('odświerzanie', employees)
     }, [refresh]);
 
     const addEmployee = async (name, email, address, phone) => {

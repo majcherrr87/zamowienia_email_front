@@ -8,11 +8,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {EmployeeContext} from "./contexts/EmployeeContext";
 import {Orders} from "./components/Orders/Orders";
+import {OrderContextProvider} from "./contexts/OrderContext";
 
 
 export const App = () => {
     const [inActive, setInActive] = useState(false);
     const {employees} = useContext(EmployeeContext);
+    console.log(employees, 'tu')
 
     return (
 
@@ -25,19 +27,22 @@ export const App = () => {
             />
 
             <div className={`container ${inActive ? 'inActive' : ''} `}>
-                <Routes>
-                    <Route path={'/'} element={<Dashboard/>}/>
-                    <Route path={'/dostawcy'} element={<Contractors/>}/>
+                <OrderContextProvider>
+                    <Routes>
+                        <Route path={'/'} element={<Dashboard/>}/>
+                        <Route path={'/dostawcy'} element={<Contractors/>}/>
 
-                    {
-                        employees.map((e, index) =>
-                            <Route key={index}
-                                   path={`/dostawca/${e.name_contractor}`}
-                                   element={<Orders name={e.name_contractor}/>}
-                            />)
-                    }
+                        {
+                            employees.map((e, index) =>
+                                <Route key={index}
+                                       path={`/dostawca/${encodeURIComponent(e.name_contractor)}`}
+                                       element={<Orders id={e.id_contractor} name={e.name_contractor}/>}
+                                />)
+                        }
 
-                </Routes>
+
+                    </Routes>
+                </OrderContextProvider>
             </div>
 
 

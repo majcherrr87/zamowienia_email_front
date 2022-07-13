@@ -37,7 +37,7 @@ export const EmployeeList = () => {
         <div className="table-title">
             <div className="row">
                 <div className="col-sm-6">
-                    <h2>Dostawcy <b>Dostawcy</b></h2>
+                    <h2>Dostawcy </h2>
                 </div>
                 <div className="col-sm-6">
                     <Button onClick={handleShow} className="btn btn-success" data-toggle="modal"><i

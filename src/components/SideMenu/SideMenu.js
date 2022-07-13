@@ -15,7 +15,7 @@ export const SideMenu = (props) => {
     const subMenus = employees.map(employee => ({
         key: employee.id_contractor,
         name: employee.name_contractor,
-        to: `/dostawca/${employee.name_contractor}`
+        to: `/dostawca/${encodeURIComponent(employee.name_contractor)}`
     }));
 
 
