@@ -9,12 +9,13 @@ import './App.css';
 import {EmployeeContext} from "./contexts/EmployeeContext";
 import {Orders} from "./components/Orders/Orders";
 import {OrderContextProvider} from "./contexts/OrderContext";
+import {SendEmail} from "./components/SendEmail/SendEmail";
 
 
 export const App = () => {
     const [inActive, setInActive] = useState(false);
     const {employees} = useContext(EmployeeContext);
-    console.log(employees, 'tu')
+
 
     return (
 
@@ -31,12 +32,18 @@ export const App = () => {
                     <Routes>
                         <Route path={'/'} element={<Dashboard/>}/>
                         <Route path={'/dostawcy'} element={<Contractors/>}/>
+                        <Route path={'/wysylanie'} element={<SendEmail/>}/>
+
 
                         {
                             employees.map((e, index) =>
                                 <Route key={index}
                                        path={`/dostawca/${encodeURIComponent(e.name_contractor)}`}
-                                       element={<Orders id={e.id_contractor} name={e.name_contractor}/>}
+                                       element={<Orders
+                                           id_contractor={e.id_contractor}
+                                           name={e.name_contractor}
+                                           email={e.email_contractor}
+                                       />}
                                 />)
                         }
 

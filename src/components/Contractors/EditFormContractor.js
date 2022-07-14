@@ -22,7 +22,7 @@ export const EditFormContractor = ({theEmployee}) => {
             <Form.Group>
                 <Form.Control
                     type='text'
-                    placeholder='Name *'
+                    placeholder='Nazwa *'
                     name='name'
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -42,7 +42,7 @@ export const EditFormContractor = ({theEmployee}) => {
             <Form.Group>
                 <Form.Control
                     as='textarea'
-                    placeholder='Address'
+                    placeholder='Adres'
                     name='address'
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
@@ -52,14 +52,14 @@ export const EditFormContractor = ({theEmployee}) => {
             <Form.Group>
                 <Form.Control
                     type='number'
-                    placeholder='Phone'
+                    placeholder='Telefon'
                     name='phone'
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                 />
             </Form.Group>
             <Button variant='success' type='submit'>
-                Edit Employee
+                Edytuj dane Dostawcy
             </Button>
         </Form>
     )

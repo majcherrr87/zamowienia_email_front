@@ -6,17 +6,33 @@ import {AddFormProduct} from "./AddFormProduct";
 
 
 export const Orders = (props) => {
-    const {order, getProduct, refresh} = useContext(OrderContext);
+    const {order, send, setSend, getProduct, refresh} = useContext(OrderContext);
     const [show, setShow] = useState(false);
+
+    order.map(e => e.id_contractor = props.id_contractor)
+
+    console.log(props)
 
 
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
+
+    const sendToLocalStorage = () => {
+        localStorage.setItem('listOfProduct', JSON.stringify(send))
+        localStorage.setItem('employee', JSON.stringify({
+            name: props.name,
+            email: props.email
+        }))
+    }
+
+
     useEffect(() => {
-        getProduct(props.id);
+        getProduct(props.id_contractor);
         handleClose()
-    }, [props.id, refresh])
+
+
+    }, [props.id_contractor, refresh])
 
 
     return (
@@ -27,8 +43,9 @@ export const Orders = (props) => {
                     <div className="col-sm-6">
                         <h2>Dostawca <b>{props.name}</b></h2>
                     </div>
-                    <div className="col-sm-3 ">
-                        <Button disabled className="btn btn-success m-0 align-items-center" data-toggle="modal"><i
+                    <div onClick={() => sendToLocalStorage()} className="col-sm-3 ">
+                        <Button href='/wysylanie' className="btn btn-success m-0 align-items-center"
+                                data-toggle="modal"><i
                             className="material-icons">&#xE147;</i> <span>Wyślij</span></Button>
                     </div>
                     <div className="col-sm-3  ">
@@ -53,7 +70,7 @@ export const Orders = (props) => {
 
                 {order.map(product => (
                     <tr key={product.id_product}>
-                        <ProductList product={product}/>
+                        <ProductList employee={props} product={product}/>
                     </tr>
                 ))
                 }
@@ -61,18 +78,20 @@ export const Orders = (props) => {
 
                 </tbody>
             </table>
+            <hr/>
+            <p>Dodaj do listy a następnie wyślij</p>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Add Employee
+                        Dodaj produkt
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <AddFormProduct id_emplyee={props.id}/>
+                    <AddFormProduct id_contractor={props.id_contractor}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant='secondary' onClick={handleClose}>
-                        Close Button
+                        Zamknij
                     </Button>
                 </Modal.Footer>
             </Modal>

@@ -48,7 +48,7 @@ export const Employee = ({employee}) => {
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Edit Employee
+                        Edycja danych dostawcy
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -56,7 +56,7 @@ export const Employee = ({employee}) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant='secondary' onClick={handleClose}>
-                        Close Button
+                        Zamknij
                     </Button>
                 </Modal.Footer>
             </Modal>

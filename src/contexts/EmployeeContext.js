@@ -14,7 +14,7 @@ export const EmployeeContextProvider = (props) => {
             const data = await res.json();
             setEmployees(data);
         })();
-        console.log('odświerzanie', employees)
+
     }, [refresh]);
 
     const addEmployee = async (name, email, address, phone) => {

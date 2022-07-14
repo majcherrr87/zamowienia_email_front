@@ -24,7 +24,7 @@ export const AddFormContractor = () => {
             <Form.Group>
                 <Form.Control
                     type='text'
-                    placeholder='Name *'
+                    placeholder='Nazwa *'
                     name='name'
                     value={name}
                     onChange={(e) => onInputChange(e)}
@@ -44,7 +44,7 @@ export const AddFormContractor = () => {
             <Form.Group>
                 <Form.Control
                     as='textarea'
-                    placeholder='Address'
+                    placeholder='Adres'
                     name='address'
                     value={address}
                     onChange={(e) => onInputChange(e)}
@@ -54,14 +54,14 @@ export const AddFormContractor = () => {
             <Form.Group>
                 <Form.Control
                     type='number'
-                    placeholder='Phone'
+                    placeholder='Telefon'
                     name='phone'
                     value={phone}
                     onChange={(e) => onInputChange(e)}
                 />
             </Form.Group>
             <Button variant='success' type='submit'>
-                Add new Employee
+                Dodaj nowego dostawcę
             </Button>
         </Form>
     )

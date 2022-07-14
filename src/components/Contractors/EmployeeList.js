@@ -41,7 +41,7 @@ export const EmployeeList = () => {
                 </div>
                 <div className="col-sm-6">
                     <Button onClick={handleShow} className="btn btn-success" data-toggle="modal"><i
-                        className="material-icons">&#xE147;</i> <span>Dodaj nowego dostawce</span></Button>
+                        className="material-icons">&#xE147;</i> <span>Dodaj nowego dostawcę</span></Button>
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@ export const EmployeeList = () => {
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>
-                    Add Employee
+                    Dane Dostawcy
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -79,7 +79,7 @@ export const EmployeeList = () => {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant='secondary' onClick={handleClose}>
-                    Close Button
+                    Zamknij
                 </Button>
             </Modal.Footer>
         </Modal>

@@ -10,16 +10,17 @@ export const AddFormProduct = (props) => {
     const setProduct = (name, value) => {
         setNewProduct({
             ...newProduct,
-            id_contractor: props.id_emplyee,
+            id_contractor: props.id_contractor,
             [name]: value
         })
     }
 
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         addOrder(newProduct);
-        setRefresh(refresh)
+        setRefresh(!!refresh)
     };
 
     return (
@@ -27,7 +28,7 @@ export const AddFormProduct = (props) => {
             <Form.Group>
                 <Form.Control
                     type='text'
-                    placeholder='Name *'
+                    placeholder='Nazwa *'
                     onChange={e => setProduct('name_product', e.target.value)}
                     required
                 />
@@ -37,14 +38,14 @@ export const AddFormProduct = (props) => {
                     onChange={e => setProduct('choice_packaging', e.target.value)}
                     aria-label="Default select example"
                     required>
-                    <option>Wybierz opakowanie</option>
+                    <option value=''>Wybierz opakowanie</option>
                     <OptionsProduct/>
                 </Form.Select>
             </Form.Group>
 
 
             <Button variant='success' type='submit'>
-                Dodaj nowy product
+                Dodaj nowy produkt
             </Button>
         </Form>
     )
