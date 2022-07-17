@@ -10,7 +10,7 @@ export const OrderContextProvider = (props) => {
 
 
     const getProduct = async (id) => {
-        const res = await fetch(`http://localhost:3001/contractors/allProduct/${id}`);
+        const res = await fetch(`https://majcher.networkmanager.pl/api/contractors/allProduct/${id}`);
         const data = await res.json();
         setOrder(data);
 
@@ -37,7 +37,7 @@ export const OrderContextProvider = (props) => {
     const addOrder = async (newProduct) => {
 
 
-        const res = await fetch(`http://localhost:3001/contractors/product`, {
+        const res = await fetch(`https://majcher.networkmanager.pl/api/contractors/product`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ export const OrderContextProvider = (props) => {
     };
     const deleteProduct = async (id) => {
 
-        await fetch(`http://localhost:3001/contractors/product/${id}`, {
+        await fetch(`https://majcher.networkmanager.pl/api/contractors/product/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export const OrderContextProvider = (props) => {
     const updateProduct = async (id_contractor, id_product, name_product, choice_packaging) => {
 
 
-        await fetch(`http://localhost:3001/contractors/product/`, {
+        await fetch(`https://majcher.networkmanager.pl/api/contractors/product/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
