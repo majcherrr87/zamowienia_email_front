@@ -10,7 +10,7 @@ export const EmployeeContextProvider = (props) => {
 
     useEffect(() => {
         (async () => {
-            const res = await fetch('http://localhost:3001/contractors/all');
+            const res = await fetch(`https://majcher.networkmanager.pl/api/contractors/all`);
             const data = await res.json();
             setEmployees(data);
         })();
@@ -18,7 +18,7 @@ export const EmployeeContextProvider = (props) => {
     }, [refresh]);
 
     const addEmployee = async (name, email, address, phone) => {
-        const res = await fetch(`http://localhost:3001/contractors/`, {
+        const res = await fetch(`https://majcher.networkmanager.pl/api/contractors/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export const EmployeeContextProvider = (props) => {
     };
     const deleteEmployee = async (id) => {
         console.log('delete', id);
-        await fetch(`http://localhost:3001/contractors/one/${id}`, {
+        await fetch(`https://majcher.networkmanager.pl/api/contractors/one/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ export const EmployeeContextProvider = (props) => {
         setRefresh(!refresh)
     };
     const updateEmployee = async (id, updatedEmployee) => {
-        await fetch(`http://localhost:3001/contractors/one/`, {
+        await fetch(`https://majcher.networkmanager.pl/api/contractors/one/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
